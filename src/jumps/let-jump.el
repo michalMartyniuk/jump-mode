@@ -1,0 +1,30 @@
+;; -*- lexical-binding: t -*-
+(provide 'let-jump)
+
+(defun js-jump-init ()
+  (interactive)
+  (jump-init (point) 'js-jump-func (js-jump-patterns) (js-jump-rules-list))
+)
+
+(defun js-jump-patterns ()
+'((name "\s")
+  (args " (")
+  (body " => {\n\t\t"))
+)
+
+(defun js-jump-func ()
+  (progn (evil-first-non-blank)
+        (insert "const ")
+        (insert " = (")
+        (insert ") => {\n\t\t")
+        (insert "\n}")
+        )
+)
+
+(defun js-jump-rules-list ()
+'((name RET (lambda nil (jump-to-next-point)))
+  (args SPC (lambda nil (insert ", ")))
+  (args RET (lambda nil (jump-to-next-point)))
+  (body SPC (lambda nil (print "body spc")))
+  (body RET (lambda nil (emacs-lisp-mode))))
+)
