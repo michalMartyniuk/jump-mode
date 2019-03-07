@@ -7,9 +7,9 @@
 )
 
 (defun js-jump-patterns ()
-  '((name "\s")
-    (args " (")
-    (body " => {\n\t\t"))
+  '((name "\s" (lambda () (insert "yo")))
+    (args " (" (lambda () (insert "yo")))
+    (body " => {\n\t\t" (lambda () (insert "yo"))))
 )
 
 (defun js-jump-func ()
