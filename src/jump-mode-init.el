@@ -1,16 +1,15 @@
 (provide 'jump-mode-init)
 
 (setq jump-mode-abbrev-table nil)
+(defvar jump-mode-hook nil)
 
 ;; MODE-MAP
 (defvar jump-mode-map
   (let ((map (make-sparse-keymap)))
-    (define-key map (kbd "SPC") 'jump-mode-SPC)
     (define-key map (kbd "RET") 'jump-mode-RET)
+    (define-key map (kbd ";") 'jump-mode-semicolon)
   map)
 )
-
-(defvar jump-mode-hook nil)
 
 ;; MODE-ABBREVS
 (define-abbrev-table 'jump-mode-abbrev-table
@@ -19,16 +18,16 @@
     )
 )
 
+
 ;; MODE-INIT
-
-(defun jump-mode-SPC ()
-  (interactive)
-  (jump-key-func 'SPC)
-)
-
 (defun jump-mode-RET ()
   (interactive)
   (jump-key-func 'RET)
+)
+
+(defun jump-mode-semicolon ()
+  (interactive)
+  (jump-key-func 'semicolon)
 )
 
 (define-derived-mode jump-mode emacs-lisp-mode "jump-mode"
