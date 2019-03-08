@@ -23,8 +23,8 @@
 
 (defun js-jump-rules-list ()
   '((name RET (lambda nil (jump-to-next-point)))
-    (args SPC (lambda nil (insert ", ")))
+    (args semicolon (lambda nil (insert ", ")))
     (args RET (lambda nil (jump-to-next-point)))
-    (body SPC (lambda nil (print "body spc")))
+    (body semicolon (lambda nil (print "body spc")))
     (body RET (lambda nil (emacs-lisp-mode))))
 )

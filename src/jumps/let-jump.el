@@ -7,20 +7,10 @@
 )
 
 (defun let-jump-patterns ()
-'((variables "(elo)" (lambda nil (print "siema")))
-  (body "\n\t lsdkfjsdl" (lambda nil (print "siema dwa"))))
-)
-
-;; (funcall (tt-patterns (let-jump-patterns)))
-
-(defun tt-patterns (patterns)
-  (let ()
-    (lambda ()
-      ;; (setq names (seq-map (lambda (el) (car el)) patterns))
-    (cl-mapcar (lambda (el) (car (nthcdr 1 el))) patterns )
-      ;; (setq names-fields (cl-mapcar 'cons names fields)
-    )
+'((variables ")\n"
+    (lambda nil (backward-char 2) (point))
   )
+  (body "\n\t"))
 )
 
 (defun let-jump-func ()
@@ -28,9 +18,10 @@
   (insert "(let ()\n\t\n)")
 )
 
-
 (defun let-jump-rules-list ()
-  '((variables SPC (lambda nil (jump-to-next-point)))
+  '(
+    (variables semicolon (lambda nil (jump-to-next-point)))
     (variables RET (lambda nil (insert "()") (backward-char)))
+    (body semicolon (lambda nil (jump-to-prev-point)))
    )
 )
